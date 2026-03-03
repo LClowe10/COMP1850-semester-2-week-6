@@ -3,20 +3,33 @@
 
 /**
  * @brief recursively calculates the factorial of an integer n.
- * 
+ *
  * @param n number to find factorial of.
  * @return int n factorial.
  */
-int factorial(int n) {
+int factorial(int n)
+{
   // the base case - this determines when the recursion should stop
-  if (n == 0) {
+  if (n == 0)
+  {
     return 1;
   }
 
   return n * factorial(n - 1);
 }
 
-int main(int argc, char **argv) {
+int nCr(int n, int r)
+{
+  return factorial(n) / (factorial(r) * factorial(n - r));
+}
+
+int nPr(int n, int r)
+{
+  return factorial(n) / factorial(n - r);
+}
+
+int main(int argc, char **argv)
+{
   /*
   The program should accept a command line argument as follows:
   ./combinatorials n C r
@@ -40,4 +53,29 @@ int main(int argc, char **argv) {
   You should try and use functions to write your program.
 
   */
+  int n, r, total;
+  char ch;
+
+  sscanf(argv[1], "%d", &n);
+  sscanf(argv[3], "%d", &r);
+  sscanf(argv[2], "%c", &ch);
+
+  if (argc != 4)
+  {
+    printf("Error: Invaid Number of Arguments\n");
+    return 1;
+  }
+
+  switch (ch)
+  {
+  case 'P':
+  case 'p':
+    total = nPr(n, r);
+    break;
+
+  case 'C':
+  case 'c':
+    total = nCr(n, r);
+    break;
+  }
 }

@@ -38,7 +38,35 @@ void test_obvious_palindrome(void) {
  * 2. Use TEST_MSG("message") to explain what went wrong if it fails
  * ============================================================ */
 
+void test_single_palindrome(void) {
+    TEST_CHECK(is_palindrome("a") == 1);
+    TEST_MSG("Expected 'a' to be a palindrome");
+}
 
+void test_empty_palindrome(void) {
+    TEST_CHECK(is_palindrome("") == 0);
+    TEST_MSG("Expected '' to not be a palindrome");
+}
+
+void test_non_palindrome(void) {
+    TEST_CHECK(is_palindrome("hello") == 0);
+    TEST_MSG("Expected 'hello' to not be a palindrome");
+}
+
+void test_even_palindrome(void) {
+    TEST_CHECK(is_palindrome("abba") == 1);
+    TEST_MSG("Expected 'abba' to be a palindrome");
+}
+
+void test_case_palindrome(void) {
+    TEST_CHECK(is_palindrome("RacEcar") == 1);
+    TEST_MSG("Expected 'Racecar' to not be a palindrome");
+}
+
+void test_space_palindrome(void) {
+    TEST_CHECK(is_palindrome("race car") == 0);
+    TEST_MSG("Expected 'race car' to not be a palindrome");
+}
 
 /* ============================================================
  * TEST_LIST - Register all your tests here
@@ -52,6 +80,12 @@ TEST_LIST = {
      * { "single character", test_single_char },
      * { "empty string", test_empty_string },
      */
+    { "single character palindrome (a)", test_single_palindrome },
+    { "empty palindrome ()", test_empty_palindrome },
+    { "non-palindrome (hello)", test_non_palindrome },
+    { "even palindrome (abba)", test_even_palindrome },
+    { "case sensitive palindrome (RacEcar)", test_case_palindrome },
+    { "space sensitive palindrome (race car)", test_space_palindrome },
     { NULL, NULL }
 };
 
@@ -67,8 +101,14 @@ TEST_LIST = {
  */
 int is_palindrome(const char *str) {
     int len = strlen(str);
+    if (len == 0)
+    {
+        printf("Invalid Input.");
+        return 1;
+    }
+
     for (int i = 0; i < len / 2; i++) {
-        if (str[i] != str[len - i - 1]) {
+        if (toupper(str[i]) != toupper(str[len - i - 1])) {
             return 0;
         }
     }

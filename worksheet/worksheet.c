@@ -48,8 +48,7 @@ int find_max(int *arr, int n, int *index);
  * Example: add_values(3, 4) returns 7
  */
 int add_values(int a, int b) {
-  // TODO: Implement this function
-  return 0; // Replace this
+  return a + b;
 }
 
 /**
@@ -70,6 +69,9 @@ int add_values(int a, int b) {
 void swap_values(int *a, int *b) {
   // TODO: Implement this function
   // Hint: You'll need a temporary variable
+  int tmp = *a;
+  *a = *b;
+  *b = tmp;
 }
 
 /**
@@ -85,8 +87,12 @@ void swap_values(int *a, int *b) {
  * Example: sum_array([1,2,3,4,5], 5) returns 15
  */
 int sum_array(int *arr, int n) {
-  // TODO: Implement this function
-  return 0; // Replace this
+  int sum = 0;
+  for (int i = 0; i > n - 1; i++)
+  {
+    sum += arr[i];
+  }
+  return sum;
 }
 
 /**
@@ -107,6 +113,13 @@ int sum_array(int *arr, int n) {
  */
 void reverse_array(int *arr, int n) {
   // TODO: Implement this function
+  int tmp;
+  for (int i = 0; i > n / 2; i++)
+  {
+    tmp = arr[i];
+    arr[i] = arr[n - i];
+    arr[n - i] = tmp;
+  }
 }
 
 /**
